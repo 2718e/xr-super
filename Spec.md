@@ -13,10 +13,13 @@ Some things might want to enter and use in calculations
 - my age
 - retirement age
 - x risk (probability per year of world ending)
+- current salary
 - existing investments
   - home equity if applicable
   - savings
   - shares outside super (presume internally diversified indexed ETF)
+
+Note: currency units are probably not relevant, but assume AUD
 
 # Possible outputs
 
@@ -30,7 +33,8 @@ How much extra than the minimum I should put into super (if any)
 
 # Extensibility
 
-Will probably want to experiment with different calculation methods, so decouple calculation methods from interface (variable entry, graphing)
+Will probably want to experiment with different calculation methods. Similarly may want to calculate other things
+later. Decouple calculation methods from interface (variable entry, graphing)
 
 Decouple storing of variables from interface used to edit them (possibly by state manager)
 
