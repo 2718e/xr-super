@@ -1,66 +1,11 @@
-# X-risk & super
+# xr-super
 
-Estimate how much extra superannuation you should salary-sacrifice, balancing the
-tax advantages of Australia's super system against the chance you never reach
-retirement because of X-risks (world-ending events).
+Silly project to try to visualise the question:
 
-Rough planning tool — not financial advice. Amounts are AUD.
+given a particular level of x-risk per year (e.g. from AI turning us all to paperclips) - how much does it make
+sense to make more than the minimum contributions to superannuation (retirement account) (balancing tax advantages
+with the risk of not making it to retirement because the world is destroyed)
 
-## The model (v1: "Model B" — risk-adjusted EV arbitrage)
+After building this, got the impression that the question doesn't really make sense in the first place. So probably wont be updating or maintaining it.
 
-For each extra pre-tax dollar, compare the expected value of two uses:
-
-- **Super (salary sacrifice):** 15% contribution tax, locked until your access
-  age, earnings taxed concessionally, tax-free on the way out — but only worth
-  anything if the world survives that long.
-- **Outside super:** taxed at your marginal rate now, invested at a lower net
-  return, but liquid — if the world ends early it keeps a fraction of its value.
-
-Each is weighted by survival probability `(1 − X-risk)^years`. When super's
-expected value is higher, the recommendation is to fill the concessional cap
-room left after the Super Guarantee; above the crossover X-risk `p*`, add
-nothing. All parameters (SG rate, caps, returns, taxes) are editable under
-"Model parameters", since these settings change over time.
-
-See the in-app "How Model B works & assumptions" panel for the full arithmetic
-and its simplifications.
-
-## Stack
-
-- React 19 + TypeScript (strict)
-- Vite (static build — deployable to Vercel/Netlify or any static host) + Vitest
-- Zustand with localStorage persistence (your values stay in your browser)
-- Recharts for graphs
-
-## Develop
-
-```bash
-npm install
-npm run dev        # local dev server
-npm test           # unit + DOM smoke tests
-npm run build      # typecheck + production build to dist/
-npm run preview    # serve the production build locally
-```
-
-## Code layout
-
-- `src/fields.ts` — single registry of every numeric input & model parameter
-  (label, units, range, defaults). UI, state, engines and sweeps derive from it.
-- `src/calc/` — pure, UI-free calculation layer:
-  - `engineB.ts` — Model B maths
-  - `index.ts` — engine registry (the seam for adding new models later)
-  - `sweep.ts` — evaluating an engine across a variable range
-- `src/tax.ts` — simplified FY2024-25 Australian marginal tax brackets
-- `src/state/store.ts` — Zustand store, decoupled from components
-- `src/components/` — inputs, sweep controls, results, charts, methodology notes
-
-`money`-group inputs (cash, shares, home equity, super balance) are collected
-but intentionally unused by Model B's marginal per-dollar comparison; they are
-reserved for richer lifetime models later.
-
-## Roadmap ideas (from Spec.md)
-
-- Lifetime expected-spending simulation ("Model A") as a second engine via the
-  registry — could use existing savings/home equity, SG-rate changes, etc.
-- More output types, more sweep-able quantities, carry-forward caps,
-  non-concessional contributions.
+According to the opencode harness, it cost me ~5 Aussie cents to make an agent build this (deepseek flash)
